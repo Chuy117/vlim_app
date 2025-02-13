@@ -1,4 +1,4 @@
-import { Text, TextInput, View } from 'react-native'
+import { TextInput } from 'react-native'
 import { inputProp } from '../interfaces/InputInterface'
 import { styles } from '../config/theme/theme'
 import { useInput } from '../hooks/useInput';

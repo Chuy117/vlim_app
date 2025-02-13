@@ -10,7 +10,6 @@ export const colours = {
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colours.background,
     },
     imageWel: {
         flex: 1,
@@ -46,17 +45,28 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     sectionSub: {
-        marginTop: 10,
-        marginBottom: 20
+        margin: 10,
+        alignItems: 'center'
     },
     textSub: {
         fontSize: 15,
-        color: '#7A7A7A'
+        color: '#7A7A7A',
+        textAlign: 'justify'
     },
     input: {
         height: 40,
         margin: 12,
         borderWidth: 1,
         padding: 10,
+        borderRadius: 15,
+        borderColor: '#6742f9',
+        borderBottomWidth: 1.5,
+        borderTopWidth: 1.5,
+        borderLeftWidth: 1.5,
+        borderRightWidth: 1.5,
+    },
+    viewPicker: {
+        alignItems: 'center',
+        paddingTop: 10,
     },
 });

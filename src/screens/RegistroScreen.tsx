@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, TextInput, View, Button, Alert } from 'react-native'
+import { KeyboardAvoidingView, TextInput, View, Button, Alert, Platform } from 'react-native'
 import { colours, styles } from '../config/theme/theme'
 import { Header } from '../components/Header'
 import { Subheader } from '../components/Subheader'
@@ -11,18 +11,36 @@ import { AccessReq } from '../interfaces/AccessReq'
 
 export const RegistroScreen = () => {
 
-    /* const [inputValue, setInputValue] = useState('');
-
-    const handleValueChange = (value: string): void => {
-        setInputValue(value);
-      }; */
-
     const [nombre, setNombre] = useState('');
     const [invitados, setInvitados] = useState('');
     const [placas, setPlacas] = useState('');
     const [asunto, setAsunto] = useState('');
     const [vehiculo, setVehiculo] = useState('');
     const [comentarios, setComentarios] = useState('');
+
+    const nombreChange = (value: string): void => {
+        setNombre(value);
+    };
+
+    const invitadosChange = (value: string): void => {
+        setInvitados(value);
+    };
+
+    const placasChange = (value: string): void => {
+        setPlacas(value);
+    };
+
+    const asuntoChange = (value: string): void => {
+        setAsunto(value);
+    };
+
+    const vehiculoChange = (value: string): void => {
+        setVehiculo(value);
+    };
+
+    const comentariosChange = (value: string): void => {
+        setComentarios(value);
+    };
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -46,8 +64,6 @@ export const RegistroScreen = () => {
     };
 
     const sendAccess = async () => {
-
-
 
         const formData = new FormData();
         formData.append('fecha', date);
@@ -91,69 +107,23 @@ export const RegistroScreen = () => {
     }
 
     return (
-        <KeyboardAvoidingView style={styles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.container}
+            keyboardVerticalOffset={60}
+        >
 
             <Header title='Registro vehicular' />
             <Subheader text='Por favor, complete el siguiente formulario para poder tener acceso' />
 
-            {/* <Input holder='Nombre completo' onValueChange={handleValueChange} />
-            <Input holder='No. invitados' type='numeric' onValueChange={handleValueChange}/>
-            <Input holder='Asunto' onValueChange={handleValueChange} />
-            <Input holder='Vehículo' onValueChange={handleValueChange} />
-            <Input holder='Placas' onValueChange={handleValueChange} />
-            <Input holder='Comentarios' onValueChange={handleValueChange} /> */}
+            <Input holder='Nombre completo' onValueChange={nombreChange} />
+            <Input holder='No. invitados' type='numeric' onValueChange={invitadosChange} />
+            <Input holder='Asunto' onValueChange={asuntoChange} />
+            <Input holder='Vehículo' onValueChange={vehiculoChange} />
+            <Input holder='Placas' onValueChange={placasChange} />
+            <Input holder='Comentarios' onValueChange={comentariosChange} />
 
-            <>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setNombre}
-                    value={nombre}
-                    placeholder={'Nombre completo'}
-                />
-            </>
-            <>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setInvitados}
-                    value={invitados}
-                    placeholder={'No. invitados'}
-                    keyboardType='numeric'
-                />
-            </>
-            <>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setAsunto}
-                    value={asunto}
-                    placeholder={'Asunto'}
-                />
-            </>
-            <>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setVehiculo}
-                    value={vehiculo}
-                    placeholder={'Vehiculo'}
-                />
-            </>
-            <>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setPlacas}
-                    value={placas}
-                    placeholder={'Placas'}
-                />
-            </>
-            <>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setComentarios}
-                    value={comentarios}
-                    placeholder={'Comentarios'}
-                />
-            </>
-
-            <>
+            <View style={styles.viewPicker}>
                 <Button title='Show Date Picker' onPress={showDatePicker} />
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}
@@ -161,7 +131,7 @@ export const RegistroScreen = () => {
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker}
                 />
-            </>
+            </View>
 
             <ButtonCustom colour={colours.primary} label='Registrar' onPress={() => sendAccess()} />
 
